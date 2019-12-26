@@ -1,17 +1,4 @@
-const request = async ({url, method, headers, params}) => {
-  const request = URLRequest(url, method, headers, params);
-  try {
-    const response = await fetch(request.url, {
-      method: request.method,
-      headers: request.headers
-    });
-    return await response.json()
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const URLRequest = (url, method, headers, params) => {
+export default (url, method, headers, params) => {
   const httpMethod = method || 'GET';
   const requestURL = new URL(url);
   const httpHeaders = headers;
@@ -28,14 +15,42 @@ export const URLRequest = (url, method, headers, params) => {
     body = params;
   }
 
-  return {
-    url: requestURL.href.endsWith('/')
-        ? requestURL.href.slice(0, -1)
-        : requestURL.href,
-    method: httpMethod,
-    headers: httpHeaders,
-    body: body
-  }
+  return new Request(
+      requestURL.href.endsWith('/')
+          ? requestURL.href.slice(0, -1)
+          : requestURL.href,
+      httpMethod,
+      httpHeaders,
+      body
+  );
 };
 
-export default request;
+class Request {
+  constructor(url, method, headers, body) {
+    this.url = url;
+    this.method = method;
+    this.headers = headers;
+    this.body = body;
+  }
+
+  async responseJSON() {
+    try {
+      const response = await this.response();
+      return await response.json()
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+
+  async response() {
+    try {
+      return await fetch(this.url, {
+        method: this.method,
+        headers: this.headers,
+        body: this.body
+      });
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+}

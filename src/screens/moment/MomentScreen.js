@@ -1,6 +1,8 @@
 import React from "react";
 import { FlatList } from "react-native";
 import MomentListItem from "./components/MomentListItem";
+import MomentService from "./service/MomentService";
+import request from '../../common/networking/URLRequest';
 
 const Data = [
   {id: "1", title: "A"},
@@ -10,6 +12,7 @@ const Data = [
 ];
 
 const MomentScreen = () => {
+  new MomentService(request).fetchMoments();
   return (
       <FlatList
           data={Data}
