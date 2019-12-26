@@ -1,18 +1,13 @@
-import request from "../../../common/networking/URLRequest";
+import URLRequest from "../../../common/networking/URLRequest";
+import Moment from "../model/Moment";
 
 export default class MomentService {
-  constructor(request = request) {
+  constructor(request = URLRequest) {
     this.request = request;
   }
 
-  fetchMoments = () => {
-    this.request("https://emagrorrim.github.io/mock-api/moments.json")
-        .responseJSON()
-        .then(moments => {
-          console.log(moments[0]);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-  }
+  fetchMoments: () => Promise<Moment | Error> = () =>
+      this.request("https://emagrorrim.github.io/mock-api/moments.json")
+          .responseJSON()
+          .then(moments => moments.map(json => Moment(json)))
 }

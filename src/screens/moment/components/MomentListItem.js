@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { Text } from "react-native";
+import { View, Text } from "react-native";
 
 const MomentListItem = (props) => {
   return (
-    <Text>{props.item.title}</Text>
+      <View>
+        <Text>{props.moment.content}</Text>
+      </View>
   );
 };
 
