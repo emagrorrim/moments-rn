@@ -12,8 +12,11 @@ class MomentScreen extends React.Component {
   }
 
   componentDidMount(): void {
+    this._fetchMoments();
+  }
+
+  _fetchMoments() {
     new MomentService().fetchMoments().then(moments => {
-      console.log(moments[0]);
       this.setState({
         moments: moments
       });
