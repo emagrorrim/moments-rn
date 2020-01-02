@@ -5,12 +5,9 @@ export default (url, method, headers, params) => {
   let body = undefined;
 
   if (httpMethod === 'GET') {
-    for (const prop in params) {
-      if (!params.hasOwnProperty(prop)) {
-        return;
-      }
-      requestURL.searchParams.append(prop, params[prop])
-    }
+    Object.keys(params || {}).forEach(key => {
+      requestURL.searchParams.append(key, params[key]);
+    });
   } else {
     body = params;
   }

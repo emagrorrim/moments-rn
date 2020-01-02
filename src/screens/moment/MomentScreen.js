@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import { FlatList } from "react-native";
 import MomentListItem from "./components/MomentListItem";
 import MomentService from "./service/MomentService";
 
-class MomentScreen extends React.Component {
+class MomentScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {

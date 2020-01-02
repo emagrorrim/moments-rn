@@ -1,4 +1,4 @@
-import URLRequest from "../../../src/common/networking/URLRequest";
+import URLRequest from "../URLRequest";
 
 describe("request", () => {
   let request;

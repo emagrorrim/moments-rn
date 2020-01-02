@@ -17,6 +17,6 @@ const Tab = TabBar({
   Document: DocumentScreen,
 });
 
-const MainScreen = () => <Tab/>;
+const MainScreen = () => <Tab />;
 
 export default MainScreen;
