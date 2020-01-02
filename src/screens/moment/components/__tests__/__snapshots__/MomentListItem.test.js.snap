@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+<View>
+  <Text>
+    test content
+  </Text>
+</View>
+`;
+
+exports[`MomentListItem  1`] = `
+<View>
+  <Text>
+    test content
+  </Text>
+</View>
+`;
+
+exports[`MomentListItem rendered as snapshot 1`] = `
+<View>
+  <Text>
+    test content
+  </Text>
+</View>
+`;
