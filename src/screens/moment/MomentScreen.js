@@ -3,7 +3,7 @@ import { FlatList } from "react-native";
 import MomentListItem from "./components/MomentListItem";
 import MomentService from "./service/MomentService";
 
-class MomentScreen extends Component {
+export default class MomentScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +15,7 @@ class MomentScreen extends Component {
     this._fetchMoments();
   }
 
-  _fetchMoments() {
+  _fetchMoments(): void {
     new MomentService().fetchMoments().then(moments => {
       this.setState({
         moments: moments
@@ -24,7 +24,6 @@ class MomentScreen extends Component {
   }
 
   render() {
-
     return (
         <FlatList
             data={this.state.moments}
@@ -34,5 +33,3 @@ class MomentScreen extends Component {
     )
   }
 }
-
-export default MomentScreen;
