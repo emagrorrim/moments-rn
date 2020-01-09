@@ -6,7 +6,7 @@ export default class MomentService {
     this.request = request;
   }
 
-  fetchMoments: () => Promise<Moment | Error> = () =>
+  fetchMoments: () => Promise<[Moment] | Error> = () =>
       this.request("https://emagrorrim.github.io/mock-api/moments.json")
           .responseJSON()
           .then(moments => moments.map(json => Moment(json)))

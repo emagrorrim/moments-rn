@@ -18,9 +18,13 @@ export default class MomentScreen extends Component {
   _fetchMoments(): void {
     new MomentService().fetchMoments().then(moments => {
       this.setState({
-        moments: moments
+        moments: moments.filter(this._isMomentValid)
       });
     });
+  }
+
+  _isMomentValid(moment): Boolean {
+    return moment.content !== undefined || (moment.images !== undefined && moment.images.length !== 0)
   }
 
   render() {
