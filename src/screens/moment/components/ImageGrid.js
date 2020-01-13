@@ -29,11 +29,19 @@ export default class ImageGrid extends Component {
 
   render() {
     const mode = this._displayMode(this.props.images.length);
+    let imageStyle;
+    if (mode === DISPLAY_MODE.STANDARD) {
+      imageStyle = styles.image;
+    } else if (mode === DISPLAY_MODE.FOUR_IMAGES) {
+      imageStyle = styles.largeImage;
+    } else if (mode === DISPLAY_MODE.ONE_LARGE_IMAGE) {
+      imageStyle = Object.assign({}, styles.mainImage, {aspectRatio: this.state.mainImageRadio});
+    }
     return (
         <View style={mode === DISPLAY_MODE.FOUR_IMAGES ? styles.imageGrid_4 : styles.imageGrid}>
           {this.props.images.map(img =>
               <Image
-                  style={Object.assign({}, mode !== DISPLAY_MODE.STANDARD ? styles.largeImage : styles.image, mode === DISPLAY_MODE.ONE_LARGE_IMAGE ? {aspectRatio: this.state.mainImageRadio} : {})}
+                  style={imageStyle}
                   key={UUID()}
                   source={{uri: img.url}}
               />
@@ -56,14 +64,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: 'space-between',
     flexWrap: "wrap",
-    maxWidth: 350,
+    maxWidth: 300,
   },
   imageGrid_4: {
     width: '66%',
     flexDirection: "row",
     justifyContent: 'space-between',
     flexWrap: "wrap",
-    maxWidth: 220,
+    maxWidth: 200,
   },
   image: {
     width: '32.5%',
@@ -73,10 +81,14 @@ const styles = StyleSheet.create({
   },
   largeImage: {
     width: '49%',
-    maxWidth: 200,
-    maxHeight: 200,
     height: 50,
     aspectRatio: 1,
     marginTop: 5
   },
+  mainImage: {
+    resizeMode: 'cover',
+    height: 120,
+    aspectRatio: 1,
+    marginTop: 5,
+  }
 });
