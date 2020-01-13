@@ -11,31 +11,29 @@ import ImageGrid from "./ImageGrid";
 
 const MomentListItem = props => {
   const moment = props.moment;
-  return (
-      <View style={styles.container}>
-        <View>
-          <Image style={styles.avatar} source={{uri: moment.sender.avatar}}/>
-        </View>
-        <View style={styles.content}>
-          <Text style={styles.username}>{moment.sender.nick}</Text>
-          {
-            moment.content !== undefined
-                ? <Text style={styles.contentText}>{moment.content}</Text>
-                : undefined
-          }
-          {
-            moment.images !== undefined && moment.images.length !== 0
-                ? <ImageGrid images={moment.images}/>
-                : undefined
-          }
-          {
-            moment.comments !== undefined && moment.comments.length !== 0
-                ? <CommentList comments={moment.comments} />
-                : undefined
-          }
-        </View>
-      </View>
-  );
+  return <View style={styles.container}>
+    <View>
+      <Image style={styles.avatar} source={{uri: moment.sender.avatar}}/>
+    </View>
+    <View style={styles.content}>
+      <Text style={styles.username}>{moment.sender.nick}</Text>
+      {
+        moment.content !== undefined
+            ? <Text style={styles.contentText}>{moment.content}</Text>
+            : undefined
+      }
+      {
+        moment.images !== undefined && moment.images.length !== 0
+            ? <ImageGrid images={moment.images}/>
+            : undefined
+      }
+      {
+        moment.comments !== undefined && moment.comments.length !== 0
+            ? <CommentList comments={moment.comments}/>
+            : undefined
+      }
+    </View>
+  </View>
 };
 
 const styles = StyleSheet.create({

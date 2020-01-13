@@ -1,5 +1,5 @@
 import {Image, StyleSheet, View} from "react-native";
-import React, { Component } from "react";
+import React, {Component} from "react";
 import UUID from "react-native-uuid";
 
 const DISPLAY_MODE = {
@@ -18,13 +18,14 @@ export default class ImageGrid extends Component {
 
   componentDidMount() {
     const mode = this._displayMode(this.props.images.length);
-    if (mode === DISPLAY_MODE.ONE_LARGE_IMAGE) {
-      Image.getSize(this.props.images[0].url, (width, height) => {
-        this.setState({
-          mainImageRadio: width / height
-        });
-      });
+    if (mode !== DISPLAY_MODE.ONE_LARGE_IMAGE) {
+      return;
     }
+    Image.getSize(this.props.images[0].url, (width, height) => {
+      this.setState({
+        mainImageRadio: width / height
+      });
+    });
   }
 
   render() {
@@ -37,24 +38,25 @@ export default class ImageGrid extends Component {
     } else if (mode === DISPLAY_MODE.ONE_LARGE_IMAGE) {
       imageStyle = Object.assign({}, styles.mainImage, {aspectRatio: this.state.mainImageRadio});
     }
-    return (
-        <View style={mode === DISPLAY_MODE.FOUR_IMAGES ? styles.imageGrid_4 : styles.imageGrid}>
-          {this.props.images.map(img =>
-              <Image
-                  style={imageStyle}
-                  key={UUID()}
-                  source={{uri: img.url}}
-              />
-          )}
-        </View>
-    )
+    return <View style={mode === DISPLAY_MODE.FOUR_IMAGES ? styles.imageGrid_4 : styles.imageGrid}>
+      {this.props.images.map(img =>
+          <Image
+              style={imageStyle}
+              key={UUID()}
+              source={{uri: img.url}}
+          />
+      )}
+    </View>
   }
 
   _displayMode = imageCount => {
     switch (imageCount) {
-      case 1: return DISPLAY_MODE.ONE_LARGE_IMAGE;
-      case 4: return DISPLAY_MODE.FOUR_IMAGES;
-      default: return DISPLAY_MODE.STANDARD;
+      case 1:
+        return DISPLAY_MODE.ONE_LARGE_IMAGE;
+      case 4:
+        return DISPLAY_MODE.FOUR_IMAGES;
+      default:
+        return DISPLAY_MODE.STANDARD;
     }
   };
 }
