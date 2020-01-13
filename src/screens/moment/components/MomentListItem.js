@@ -42,7 +42,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     paddingHorizontal: 16,
-    paddingVertical: 12
+    paddingVertical: 12,
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#CCCCCC"
   },
   avatar: {
     width: 40,
