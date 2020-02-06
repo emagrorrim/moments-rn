@@ -4,4 +4,4 @@ const placeholderReducer = (state = [], action) => {
   return [...state];
 };
 
-export default combineReducers({ placeholder: placeholderReducer })
+export default combineReducers({ placeholder: placeholderReducer });
